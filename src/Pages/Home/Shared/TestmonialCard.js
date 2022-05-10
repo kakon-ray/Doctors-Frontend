@@ -9,7 +9,7 @@ const TestmonialCard = ({ img, desc, name, address }) => {
         </div>
 
         <div className="flex justify-center gap-6">
-          <img src={img} alt="Shoes" className="w-12 h-12" />
+          <img src={img} alt="Shoes" className="w-16 h-16" />
           <div>
             <h1 className="font-bold">{name}</h1>
             <p>{address}</p>

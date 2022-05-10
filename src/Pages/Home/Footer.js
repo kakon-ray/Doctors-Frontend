@@ -35,6 +35,7 @@ const Footer = () => {
           </footer>
         </div>
       </div>
+      <p className="text-center pb-4">Copyright 2022 All Rights Reserved</p>
     </section>
   );
 };
