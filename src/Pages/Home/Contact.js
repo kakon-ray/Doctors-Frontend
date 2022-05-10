@@ -4,8 +4,8 @@ import ContactCard from "./Shared/ContactCard";
 const Contact = () => {
   return (
     <>
-      <div class="hero bg-base-200">
-        <div className="container mx-auto px-12 pb-12">
+      <div class="hero">
+        <div className="mx-6 pb-12">
           <div className="grid lg:grid-cols-3 grid-cols-1 gap-5">
             <ContactCard
               title="Opening Hours"
