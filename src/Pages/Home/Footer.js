@@ -9,6 +9,7 @@ const Footer = () => {
           class="hero"
           style={{
             backgroundImage: `url(${img})`,
+            backgroundSize: "cover",
           }}
         >
           <footer class="footer p-10 justify-items-center  text-neutral-content text-center">
