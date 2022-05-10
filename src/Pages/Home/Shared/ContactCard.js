@@ -5,7 +5,7 @@ const ContactCard = ({ bgColor, title, description, icon }) => {
     <div
       className={`hero-content flex-col py-8 lg:flex-row ${bgColor} rounded-lg`}
     >
-      {icon}
+      <img src={icon} alt="" />
       <div>
         <h1 class="text-xl font-bold text-white">{title}</h1>
         <p class="py-2 text-yellow-50">{description}</p>
