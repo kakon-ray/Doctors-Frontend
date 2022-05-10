@@ -3,7 +3,7 @@ import img from "../../assets/images/treatment.png";
 
 const DentalCare = () => {
   return (
-    <div class="hero min-h-screen ">
+    <section class="hero min-h-screen ">
       <div class="hero-content flex-col lg:flex-row-reverse lg:mx-28">
         <div className="lg:ml-12">
           <h1 class="text-5xl font-bold">
@@ -27,7 +27,7 @@ const DentalCare = () => {
           alt=""
         />
       </div>
-    </div>
+    </section>
   );
 };
 

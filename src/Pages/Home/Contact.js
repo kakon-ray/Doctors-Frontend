@@ -7,7 +7,7 @@ import icon3 from "../../assets/icons/phone.svg";
 const Contact = () => {
   return (
     <>
-      <div class="hero">
+      <section class="hero">
         <div className="mx-6 pb-12">
           <div className="grid lg:grid-cols-3 grid-cols-1 gap-5">
             <ContactCard
@@ -30,7 +30,7 @@ const Contact = () => {
             />
           </div>
         </div>
-      </div>
+      </section>
     </>
   );
 };

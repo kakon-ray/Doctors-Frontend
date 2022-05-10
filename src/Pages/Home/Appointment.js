@@ -3,7 +3,7 @@ import img from "../../assets/images/chair.png";
 import doctor from "../../assets/images/doctor-small.png";
 const Appointment = () => {
   return (
-    <div className="mt-28 mb-16">
+    <section className="mt-28 mb-16">
       <div
         class="hero"
         style={{
@@ -16,14 +16,16 @@ const Appointment = () => {
               <div className="absolute bottom-0 ">
                 <img
                   src={doctor}
-                  className="object-contain lg:max-w-lg max-h-auto sm:hidden lg:static lg:block"
+                  className="object-contain lg:max-w-lg max-h-auto sm:hidden lg:block"
                   alt=""
                 />
               </div>
             </div>
             <div className="py-12 text-white">
-              <h3 className="text-sm text-secondary">Appointment</h3>
-              <h1 className="py-3 text-3xl font-bold">
+              <h3 className="text-2xl font-bold text-secondary uppercase">
+                Appointment
+              </h3>
+              <h1 className="py-3 text-4xl font-bold">
                 Make an appointment Today
               </h1>
               <p className="py-b">
@@ -41,7 +43,7 @@ const Appointment = () => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

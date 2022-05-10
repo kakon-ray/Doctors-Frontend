@@ -2,8 +2,12 @@ import React from "react";
 import img from "../../assets/images/chair.png";
 const Banner = () => {
   return (
-    <div>
-      <div class="hero min-h-screen">
+    <section
+      style={{
+        backgroundImage: `url(${img})`,
+      }}
+    >
+      <div class="hero min-h-screen bg-white bg-opacity-90">
         <div class="hero-content flex-col lg:flex-row-reverse container mx-auto px-12">
           <img
             src={img}
@@ -23,7 +27,7 @@ const Banner = () => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

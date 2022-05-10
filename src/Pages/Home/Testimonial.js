@@ -4,11 +4,13 @@ import TestmonialCard from "./Shared/TestmonialCard";
 
 const Testimonial = () => {
   return (
-    <div>
+    <section>
       <div className="mb-12 mx-6">
         <div className="text-center py-6 pt-10">
-          <p className="text-sm font-bold text-secondary">Testimonial</p>
-          <h1 className="text-2xl">What Our Patients Says</h1>
+          <p className="text-xl font-bold text-secondary uppercase">
+            Testimonial
+          </p>
+          <h1 className="text-4xl">What Our Patients Says</h1>
         </div>
         <div className="grid lg:grid-cols-3 sm:grid-cols-1 gap-12">
           <TestmonialCard
@@ -31,7 +33,7 @@ const Testimonial = () => {
           />
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

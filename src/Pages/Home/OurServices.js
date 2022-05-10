@@ -6,10 +6,10 @@ import img3 from "../../assets/images/whitening.png";
 
 const OurServices = () => {
   return (
-    <div className="my-12 mx-6">
+    <section className="my-12 mx-6">
       <div className="text-center py-6 pt-10">
-        <p className="text-sm font-bold text-secondary">OUR SERVICES</p>
-        <h1 className="text-2xl">Services We Provide</h1>
+        <p className="text-xl font-bold text-secondary">OUR SERVICES</p>
+        <h1 className="text-4xl">Services We Provide</h1>
       </div>
       <div className="grid lg:grid-cols-3 sm:grid-cols-1 gap-12">
         <OurServicesCard
@@ -28,7 +28,7 @@ const OurServices = () => {
           description="Lorem Ipsum is simply dummy printing and typesetting indust Ipsum has been the"
         />
       </div>
-    </div>
+    </section>
   );
 };
 

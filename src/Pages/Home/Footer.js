@@ -3,7 +3,7 @@ import React from "react";
 import img from "../../assets/images/bg.png";
 const Footer = () => {
   return (
-    <div>
+    <section>
       <div className="mt-28 mb-16">
         <div
           class="hero"
@@ -35,7 +35,7 @@ const Footer = () => {
           </footer>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

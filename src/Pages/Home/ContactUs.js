@@ -4,7 +4,7 @@ import img from "../../assets/images/chair.png";
 
 const ContactUs = () => {
   return (
-    <div>
+    <section>
       <div className="relative">
         <div className="mt-10 mb-16">
           <div className="w-100">
@@ -20,7 +20,9 @@ const ContactUs = () => {
             <div class="hero-content flex-col lg:flex-row-reverse left-0 absolute top-0 left-0 right-0 bottom-0">
               <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                 <div className="text-center pt-4">
-                  <h4 className="text-lg font-bold text-secondary">Contact</h4>
+                  <h4 className="text-xl font-bold text-secondary uppercase py-2">
+                    Contact
+                  </h4>
                   <p className="text-3xl">Stay connected with us</p>
                 </div>
                 <div class="card-body">
@@ -60,7 +62,7 @@ const ContactUs = () => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
