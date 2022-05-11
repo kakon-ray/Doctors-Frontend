@@ -7,8 +7,8 @@ const ContactCard = ({ bgColor, title, description, icon }) => {
     >
       <img src={icon} alt="" />
       <div>
-        <h1 class="text-xl font-bold text-white">{title}</h1>
-        <p class="py-2 text-yellow-50">{description}</p>
+        <h1 className="text-xl font-bold text-white">{title}</h1>
+        <p className="py-2 text-yellow-50">{description}</p>
       </div>
     </div>
   );

@@ -6,7 +6,7 @@ import img3 from "../../assets/images/whitening.png";
 
 const OurServices = () => {
   return (
-    <section className="my-12 mx-6">
+    <section className="my-12 mx-12">
       <div className="text-center py-6 pt-10">
         <p className="text-xl font-bold text-secondary">OUR SERVICES</p>
         <h1 className="text-4xl">Services We Provide</h1>

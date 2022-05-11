@@ -5,7 +5,7 @@ const Appointment = () => {
   return (
     <section className="mt-28 mb-16">
       <div
-        class="hero"
+        className="hero"
         style={{
           backgroundImage: `url(${img})`,
         }}
@@ -36,7 +36,7 @@ const Appointment = () => {
                 here, content here', making it look like readable English. Many
                 desktop publishing packages and web page
               </p>
-              <button class="btn mt-6 btn-primary bg-gradient-to-r from-secondary to-primary text-white font-bold">
+              <button className="btn mt-6 btn-primary bg-gradient-to-r from-secondary to-primary text-white font-bold">
                 Get Started
               </button>
             </div>

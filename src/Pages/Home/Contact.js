@@ -7,8 +7,8 @@ import icon3 from "../../assets/icons/phone.svg";
 const Contact = () => {
   return (
     <>
-      <section class="hero">
-        <div className="mx-6 pb-12">
+      <section className="hero">
+        <div className="mx-12 pb-12">
           <div className="grid lg:grid-cols-3 grid-cols-1 gap-5">
             <ContactCard
               title="Opening Hours"

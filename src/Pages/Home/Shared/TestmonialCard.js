@@ -3,8 +3,8 @@ import React from "react";
 const TestmonialCard = ({ img, desc, name, address }) => {
   return (
     <div>
-      <div class="card bg-base-100 shadow-xl py-6">
-        <div class="card-body">
+      <div className="card bg-base-100 shadow-xl py-6">
+        <div className="card-body">
           <p className="px-6">{desc}</p>
         </div>
 

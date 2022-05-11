@@ -17,42 +17,42 @@ const ContactUs = () => {
           </div>
 
           <div className="absolute top-0 left-0 right-0 bottom-0 bg-black bg-opacity-70">
-            <div class="hero-content flex-col lg:flex-row-reverse left-0 absolute top-0 left-0 right-0 bottom-0">
-              <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+            <div className="hero-content flex-col lg:flex-row-reverse left-0 absolute top-0 left-0 right-0 bottom-0">
+              <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                 <div className="text-center pt-4">
                   <h4 className="text-xl font-bold text-secondary uppercase py-2">
                     Contact
                   </h4>
                   <p className="text-3xl">Stay connected with us</p>
                 </div>
-                <div class="card-body">
-                  <div class="form-control">
-                    <label class="label">
-                      <span class="label-text">Email</span>
+                <div className="card-body">
+                  <div className="form-control">
+                    <label className="label">
+                      <span className="label-text">Email</span>
                     </label>
                     <input
                       type="text"
                       placeholder="email"
-                      class="input input-bordered"
+                      className="input input-bordered"
                     />
                   </div>
-                  <div class="form-control">
-                    <label class="label">
-                      <span class="label-text">Password</span>
+                  <div className="form-control">
+                    <label className="label">
+                      <span className="label-text">Password</span>
                     </label>
                     <input
                       type="text"
                       placeholder="password"
-                      class="input input-bordered"
+                      className="input input-bordered"
                     />
-                    <label class="label">
-                      <a href="#" class="label-text-alt link link-hover">
+                    <label className="label">
+                      <a href="#" className="label-text-alt link link-hover">
                         Forgot password?
                       </a>
                     </label>
                   </div>
-                  <div class="form-control ">
-                    <button class="btn mt-4 btn-primary bg-gradient-to-r from-secondary to-primary text-white font-bold">
+                  <div className="form-control ">
+                    <button className="btn mt-4 btn-primary bg-gradient-to-r from-secondary to-primary text-white font-bold">
                       Get Started
                     </button>
                   </div>

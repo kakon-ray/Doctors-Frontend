@@ -6,7 +6,7 @@ import quot from "../../assets/icons/quote.svg";
 const Testimonial = () => {
   return (
     <section>
-      <div className="flex justify-between mx-6">
+      <div className="flex justify-between mx-12">
         <div className="py-6 pt-10">
           <p className="text-xl font-bold text-secondary uppercase">
             Testimonial
@@ -17,7 +17,7 @@ const Testimonial = () => {
           <img className="object-cover h-48 w-96 " src={quot} alt="" />
         </div>
       </div>
-      <div className="mb-12 mx-6 flex justify-between">
+      <div className="mb-12 mx-12 flex justify-between">
         <div className="grid lg:grid-cols-3 sm:grid-cols-1 gap-12">
           <TestmonialCard
             img={img}
