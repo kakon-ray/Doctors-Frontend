@@ -6,7 +6,7 @@ const Navbar = () => {
   const Links = [
     { name: "Home", link: "/" },
     { name: "About", link: "/" },
-    { name: "Appointment", link: "/" },
+    { name: "Appointment", link: "/appintment" },
     { name: "Reviews", link: "/" },
     { name: "Contact Us", link: "/" },
     { name: "Login", link: "/" },
