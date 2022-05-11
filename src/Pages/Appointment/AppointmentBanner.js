@@ -1,6 +1,16 @@
 import React from "react";
 import img from "../../assets/images/chair.png";
+import { DayPicker } from "react-day-picker";
+import "react-day-picker/dist/style.css";
+import { format } from "date-fns";
+
 const AppointmentBanner = () => {
+  const [selected, setSelected] = React.useState(new Date());
+
+  let footer = <p>Please pick a day.</p>;
+  if (selected) {
+    footer = <p>You picked {format(selected, "PP")}.</p>;
+  }
   return (
     <section
       style={{
@@ -8,22 +18,20 @@ const AppointmentBanner = () => {
       }}
     >
       <div className="hero min-h-screen bg-white bg-opacity-90">
-        <div className="hero-content flex-col lg:flex-row-reverse container mx-auto px-12">
+        <div className="hero-content flex-col lg:flex-row-reverse lg:gap-24 ">
           <img
             src={img}
             className="rounded-lg shadow-2xl object-contain lg:max-w-lg max-h-auto"
             alt=""
           />
           <div>
-            <h1 className="text-5xl font-bold">Box Office News!</h1>
-            <p className="py-6">
-              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-              excepturi exercitationem quasi. In deleniti eaque aut repudiandae
-              et a id nisi.
-            </p>
-            <button className="btn btn-primary bg-gradient-to-r from-secondary to-primary text-white font-bold">
-              Get Started
-            </button>
+            <DayPicker
+              mode="single"
+              selected={selected}
+              onSelect={setSelected}
+              footer={footer}
+            />
+            ;
           </div>
         </div>
       </div>
