@@ -5,10 +5,11 @@ import "./Appointment.css";
 import AppointmentTime from "./AppointmentTime";
 
 const Appointment = () => {
+  const [selected, setSelected] = React.useState(new Date());
   return (
     <div>
-      <AppointmentBanner />
-      <AppointmentTime />
+      <AppointmentBanner selected={selected} setSelected={setSelected} />
+      <AppointmentTime selected={selected} />
       <Footer />
     </div>
   );

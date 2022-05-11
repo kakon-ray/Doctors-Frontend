@@ -1,45 +1,34 @@
-import React from "react";
+import { format } from "date-fns";
+import React, { useState, useEffect } from "react";
 import AppointmentTimeCard from "./Shared/AppointmentTimeCard";
+import Modal from "./Shared/Modal";
 
-const AppointmentTime = () => {
+const AppointmentTime = ({ selected }) => {
+  const [services, setServices] = useState([]);
+  const [modalData, setModalData] = useState(null);
+
+  useEffect(() => {
+    fetch("services.json")
+      .then((res) => res.json())
+      .then((data) => setServices(data));
+  }, []);
+
+  console.log(modalData);
   return (
     <div>
       <div className="mx-12">
-        <h1 className="text-center text-primary font-bold text-lg pb-12">
-          Available Appointments on April 30, 2022
+        <h1 className="text-center text-primary font-bold text-2xl pb-12">
+          Available Appointments on {format(selected, "PP")}
         </h1>
         <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-6 ">
-          <AppointmentTimeCard
-            title="Teeth Orthodontics"
-            space="8:00 AM - 9:00 AM"
-            space2="10 SPACES AVAILABLE"
-          />
-          <AppointmentTimeCard
-            title="Teeth Orthodontics"
-            space="8:00 AM - 9:00 AM"
-            space2="10 SPACES AVAILABLE"
-          />
-          <AppointmentTimeCard
-            title="Teeth Orthodontics"
-            space="8:00 AM - 9:00 AM"
-            space2="10 SPACES AVAILABLE"
-          />
-          <AppointmentTimeCard
-            title="Teeth Orthodontics"
-            space="8:00 AM - 9:00 AM"
-            space2="10 SPACES AVAILABLE"
-          />
-          <AppointmentTimeCard
-            title="Teeth Orthodontics"
-            space="8:00 AM - 9:00 AM"
-            space2="10 SPACES AVAILABLE"
-          />
-          <AppointmentTimeCard
-            title="Teeth Orthodontics"
-            space="8:00 AM - 9:00 AM"
-            space2="10 SPACES AVAILABLE"
-          />
+          {services.map((item) => {
+            return (
+              <AppointmentTimeCard service={item} setModalData={setModalData} />
+            );
+          })}
         </div>
+
+        {modalData && <Modal selected={selected} modalData={modalData}></Modal>}
       </div>
     </div>
   );
