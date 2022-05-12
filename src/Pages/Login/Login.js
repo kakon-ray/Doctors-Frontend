@@ -6,9 +6,9 @@ import SocialLogin from "./SocialLogin";
 const Login = () => {
   return (
     <div className="min-h-screen bg-base-200">
-      <div class="flex justify-center">
+      <div class="flex justify-center my-6">
         <div class="card flex-shrink-0 w-full max-w-lg mt-12 shadow-2xl bg-base-100">
-          <h1 className="text-center text-accent font-bold text-3xl mb-0 pb-0 pt-6">
+          <h1 className="text-center text-accent font-bold text-3xl mb-0 pt-6 ">
             Login
           </h1>
           <div class="card-body pt-0 pb-4">
