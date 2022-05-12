@@ -9,12 +9,13 @@ const Navbar = () => {
     { name: "Appointment", link: "/appintment" },
     { name: "Reviews", link: "/" },
     { name: "Contact Us", link: "/" },
-    { name: "Login", link: "/" },
+    { name: "Login", link: "/login" },
+    { name: "Registaion", link: "/registaion" },
   ];
   return (
     <div>
       <div className="navbar bg-base-100">
-        <div className="navbar-start">
+        <div>
           <div className="dropdown">
             <label tabindex="0" className="btn btn-ghost lg:hidden">
               <svg
@@ -42,7 +43,7 @@ const Navbar = () => {
           </div>
           <a className="btn btn-ghost normal-case text-xl">Doctors</a>
         </div>
-        <div className="navbar-right flex justify-end hidden lg:flex">
+        <div className="navbar-right flex ml-auto justify-end hidden lg:flex">
           <ul className="menu menu-horizontal p-0">
             {Links.map((li) => {
               return (

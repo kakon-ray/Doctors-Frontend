@@ -22,6 +22,7 @@ const Modal = ({ modalData, selected, setModalData }) => {
       alert("users added successfully!!!");
     });
 
+    // if setModalData null the modal is close
     setModalData(null);
   };
   return (

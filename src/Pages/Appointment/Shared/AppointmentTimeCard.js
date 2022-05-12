@@ -25,7 +25,7 @@ const AppointmentTimeCard = ({ service, setModalData }) => {
               disabled={service.slots.length === 0}
               for="appointment-modal"
               onClick={() => setModalData(service)}
-              className=" btn btn-primary bg-gradient-to-r from-secondary to-primary text-white font-bold"
+              className=" btn btn-primary btn-sm bg-gradient-to-r from-secondary to-primary text-white font-bold"
             >
               Book Appointment
             </label>
