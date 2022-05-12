@@ -8,12 +8,11 @@ const AppointmentTime = ({ selected }) => {
   const [modalData, setModalData] = useState(null);
 
   useEffect(() => {
-    fetch("services.json")
+    fetch("http://localhost:5000/services")
       .then((res) => res.json())
       .then((data) => setServices(data));
   }, []);
 
-  console.log(modalData);
   return (
     <div>
       <div className="mx-12">
@@ -28,7 +27,13 @@ const AppointmentTime = ({ selected }) => {
           })}
         </div>
 
-        {modalData && <Modal selected={selected} modalData={modalData}></Modal>}
+        {modalData && (
+          <Modal
+            selected={selected}
+            modalData={modalData}
+            setModalData={setModalData}
+          ></Modal>
+        )}
       </div>
     </div>
   );
