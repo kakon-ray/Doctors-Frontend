@@ -5,6 +5,7 @@ import SocialLogin from "./SocialLogin";
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from "../../firebase.init";
 import Swal from "sweetalert2";
+import img from "../../assets/images/chair.png";
 
 const Login = () => {
 
@@ -39,9 +40,12 @@ e.target.reset()
   }
 
   return (
-    <div className="min-h-screen bg-base-200">
-      <div class="flex justify-center my-6">
-        <div class="card flex-shrink-0 w-full max-w-lg mt-12 shadow-2xl bg-base-100">
+    <div className="min-h-screen bg-base-200" style={{
+        backgroundImage: `url(${img})`,
+      }}>
+     <div className="min-h-screen bg-black bg-opacity-90">
+        <div class="flex justify-center pt-8  ">
+        <div class="card flex-shrink-0 w-full max-w-lg shadow-2xl bg-base-100">
           <h1 className="text-center text-accent font-bold text-3xl mb-0 pt-6 ">
             Login
           </h1>
@@ -88,6 +92,7 @@ e.target.reset()
           <SocialLogin />
         </div>
       </div>
+     </div>
     </div>
   );
 };

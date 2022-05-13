@@ -9,6 +9,7 @@ import {
   useAuthState,
 } from "react-firebase-hooks/auth";
 import Swal from "sweetalert2";
+import img from "../../assets/images/chair.png";
 
 const Registation = () => {
   const [emailError, setEmailError] = useState("");
@@ -70,9 +71,12 @@ const Registation = () => {
   }
 
   return (
-    <div className="min-h-screen bg-base-200 ">
-      <div class="flex justify-center">
-        <div class="card flex-shrink-0 w-full max-w-lg shadow-2xl bg-base-100 mt-2">
+    <div className="min-h-screen bg-base-200 "tyle={{
+        backgroundImage: `url(${img})`,
+      }}>
+     <div className="min-h-screen bg-black bg-opacity-90">
+        <div class="flex justify-center">
+        <div class="card flex-shrink-0 w-full max-w-lg shadow-2xl bg-base-100 mt-1">
           <h1 className="text-center text-accent font-bold text-3xl mb-0 pt-6">
             Registation
           </h1>
@@ -155,6 +159,7 @@ const Registation = () => {
           <SocialLogin />
         </div>
       </div>
+     </div>
     </div>
   );
 };
