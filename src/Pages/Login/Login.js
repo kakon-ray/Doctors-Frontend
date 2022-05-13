@@ -2,8 +2,42 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import SocialLogin from "./SocialLogin";
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import auth from "../../firebase.init";
+import Swal from "sweetalert2";
 
 const Login = () => {
+
+  const [
+  signInWithEmailAndPassword,
+  user,
+  loading,
+  error,
+] = useSignInWithEmailAndPassword(auth);
+
+const handleLogin = (e) => {
+e.preventDefault()
+const email = e.target.email.value
+const password = e.target.password.value
+
+console.log(email,password)
+
+signInWithEmailAndPassword(email,password)
+
+e.target.reset()
+
+}
+
+  if (user) {
+    Swal.fire({
+      position: "top-center",
+      icon: "success",
+      title: "Your Registation Success",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  }
+
   return (
     <div className="min-h-screen bg-base-200">
       <div class="flex justify-center my-6">
@@ -12,13 +46,15 @@ const Login = () => {
             Login
           </h1>
           <div class="card-body pt-0 pb-4">
-            <div class="form-control">
+            <form action="" onSubmit={handleLogin}>
+                        <div class="form-control">
               <label class="label">
                 <span class="label-text">Email</span>
               </label>
               <input
-                type="text"
-                placeholder="email"
+                type="email"
+                name="email"
+                placeholder="Email"
                 class="input input-bordered"
               />
             </div>
@@ -27,7 +63,8 @@ const Login = () => {
                 <span class="label-text">Password</span>
               </label>
               <input
-                type="text"
+                type="password"
+                name="password"
                 placeholder="password"
                 class="input input-bordered"
               />
@@ -46,6 +83,7 @@ const Login = () => {
                 </Link>
               </p>
             </div>
+            </form>
           </div>
           <SocialLogin />
         </div>

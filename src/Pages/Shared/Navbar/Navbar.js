@@ -1,20 +1,25 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { signOut } from "firebase/auth";
 import { Link } from "react-router-dom";
+import auth from "../../../firebase.init";
 
 const Navbar = () => {
+
+   const [user, loading, error] = useAuthState(auth);
+
   const Links = [
     { name: "Home", link: "/" },
     { name: "About", link: "/" },
     { name: "Appointment", link: "/appintment" },
     { name: "Reviews", link: "/" },
     { name: "Contact Us", link: "/" },
-    { name: "Login", link: "/login" },
-    { name: "Registaion", link: "/registaion" },
+
   ];
   return (
     <div>
-      <div className="navbar bg-base-100">
+      <div className="navbar bg-base-100 uppercase text-sm">
         <div>
           <div className="dropdown">
             <label tabindex="0" className="btn btn-ghost lg:hidden">
@@ -43,17 +48,26 @@ const Navbar = () => {
           </div>
           <a className="btn btn-ghost normal-case text-xl">Doctors</a>
         </div>
-        <div className="navbar-right flex ml-auto justify-end hidden lg:flex">
+        <div className="navbar-right flex ml-auto justify-end hidden lg:flex mr-12">
           <ul className="menu menu-horizontal p-0">
             {Links.map((li) => {
               return (
-                <li>
+                <li className="mx-2">
                   {" "}
                   <Link to={li.link}>{li.name}</Link>
                 </li>
               );
             })}
+
           </ul>
+
+           <div className="ml-6">
+              {
+              user? <p onClick={()=>signOut(auth)} className="cursor-pointer">Sign Out</p>:  <Link to="/login">Login </Link>
+            }
+           </div>
+          
+       
         </div>
       </div>
     </div>

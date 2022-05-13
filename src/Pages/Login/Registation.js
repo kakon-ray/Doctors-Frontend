@@ -1,12 +1,22 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import SocialLogin from "./SocialLogin";
 import validator from "validator";
+import auth from "../../firebase.init";
+import {
+  useCreateUserWithEmailAndPassword,
+  useAuthState,
+} from "react-firebase-hooks/auth";
+import Swal from "sweetalert2";
 
 const Registation = () => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPsswordError] = useState("");
+
+  const [currentUser] = useAuthState(auth);
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
 
   const emailRef = useRef("");
   const passwordRef = useRef("");
@@ -44,8 +54,20 @@ const Registation = () => {
       setPsswordError(false);
     }
 
+    createUserWithEmailAndPassword(email, password);
+
     console.log(email, password, confirmPassword);
   };
+
+  if (user) {
+    Swal.fire({
+      position: "top-center",
+      icon: "success",
+      title: "Your Registation Success",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  }
 
   return (
     <div className="min-h-screen bg-base-200 ">
@@ -65,23 +87,25 @@ const Registation = () => {
                   )}
                 </label>
                 <input
-                  type="text"
+                  type="email"
+                  name="email"
                   ref={emailRef}
                   placeholder="email"
                   class="input input-bordered"
                 />
               </div>
               <div class="form-control">
-                {passwordError}
                 <label class="label">
                   {!passwordError ? (
                     <span class="label-text">Password</span>
                   ) : (
-                    <span className="text-red text-sm">{passwordError}</span>
+                    <span className="text-red-600 text-sm">
+                      {passwordError}
+                    </span>
                   )}
                 </label>
                 <input
-                  type="text"
+                  type="password"
                   ref={passwordRef}
                   placeholder="password"
                   class="input input-bordered"
@@ -89,10 +113,18 @@ const Registation = () => {
               </div>
               <div class="form-control">
                 <label class="label">
-                  <span class="label-text">Password</span>
+                  <label class="label">
+                    {!passwordError ? (
+                      <span class="label-text">Confirm Password</span>
+                    ) : (
+                      <span className="text-red-600 text-sm">
+                        {passwordError}
+                      </span>
+                    )}
+                  </label>
                 </label>
                 <input
-                  type="text"
+                  type="password"
                   ref={confirmPasswordRef}
                   placeholder="Confirm Password"
                   class="input input-bordered"

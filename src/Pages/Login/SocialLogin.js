@@ -1,6 +1,12 @@
 import React from "react";
+import { useSignInWithGoogle } from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
 
 const SocialLogin = () => {
+
+  const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
+  
+
   return (
     <>
       <div className="flex items-center w-80 mx-auto">
@@ -10,7 +16,7 @@ const SocialLogin = () => {
       </div>
 
       <div class="form-control py-4 mx-8">
-        <button class="btn btn-outline hover:bg-accent text-accent font-bold">
+        <button class="btn btn-outline hover:bg-accent text-accent font-bold" onClick={()=>signInWithGoogle()}>
           CONTINUE WITH GOOGLE
         </button>
       </div>
