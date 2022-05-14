@@ -10,54 +10,23 @@ import {
 } from "react-firebase-hooks/auth";
 import Swal from "sweetalert2";
 import img from "../../assets/images/chair.png";
+import { useForm } from "react-hook-form";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const Registation = () => {
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPsswordError] = useState("");
-
   const [currentUser] = useAuthState(auth);
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
 
-  const emailRef = useRef("");
-  const passwordRef = useRef("");
-  const confirmPasswordRef = useRef("");
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
 
-  const handleRegistaion = (e) => {
-    e.preventDefault();
-    const email = emailRef.current.value;
-    const password = passwordRef.current.value;
-    const confirmPassword = confirmPasswordRef.current.value;
-
-    const mediumRegex = new RegExp(
-      "^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})"
-    );
-    const isOk = mediumRegex.test(password);
-
-    if (!validator.isEmail(email)) {
-      setEmailError("Please Enter Valid Email Address");
-      return;
-    } else {
-      setEmailError("");
-    }
-
-    if (password !== confirmPassword) {
-      setPsswordError("Two password does not match");
-      return;
-    } else {
-      setPsswordError("");
-    }
-
-    if (!isOk) {
-      setPsswordError("Password must a-z,0-9 and 6 char longer");
-      return;
-    } else {
-      setPsswordError(false);
-    }
-
-    createUserWithEmailAndPassword(email, password);
-
-    console.log(email, password, confirmPassword);
+  const onSubmit = (data) => {
+    createUserWithEmailAndPassword(data.email, data.password);
   };
 
   if (user) {
@@ -71,95 +40,102 @@ const Registation = () => {
   }
 
   return (
-    <div className="min-h-screen bg-base-200 "tyle={{
+    <div
+      className="min-h-screen bg-base-200 "
+      style={{
         backgroundImage: `url(${img})`,
-      }}>
-     <div className="min-h-screen bg-black bg-opacity-90">
+      }}
+    >
+      <div className="min-h-screen bg-black bg-opacity-90">
         <div class="flex justify-center">
-        <div class="card flex-shrink-0 w-full max-w-lg shadow-2xl bg-base-100 mt-1">
-          <h1 className="text-center text-accent font-bold text-3xl mb-0 pt-6">
-            Registation
-          </h1>
-          <div class="card-body  pb-4 pt-5">
-            <form action="" onSubmit={handleRegistaion}>
-              <div class="form-control">
-                <label class="label">
-                  {!emailError ? (
-                    <span class="label-text">Email</span>
-                  ) : (
-                    <span className="text-red-600">{emailError}</span>
-                  )}
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  ref={emailRef}
-                  placeholder="email"
-                  class="input input-bordered"
-                />
-              </div>
-              <div class="form-control">
-                <label class="label">
-                  {!passwordError ? (
-                    <span class="label-text">Password</span>
-                  ) : (
-                    <span className="text-red-600 text-sm">
-                      {passwordError}
-                    </span>
-                  )}
-                </label>
-                <input
-                  type="password"
-                  ref={passwordRef}
-                  placeholder="password"
-                  class="input input-bordered"
-                />
-              </div>
-              <div class="form-control">
-                <label class="label">
+          <div class="card flex-shrink-0 w-full max-w-lg shadow-2xl bg-base-100 mt-1">
+            <h1 className="text-center text-accent font-bold text-3xl mb-0 pt-6">
+              Registation
+            </h1>
+            <div class="card-body  pb-4 pt-5">
+              <form action="" onSubmit={handleSubmit(onSubmit)}>
+                <div class="form-control">
                   <label class="label">
-                    {!passwordError ? (
-                      <span class="label-text">Confirm Password</span>
-                    ) : (
-                      <span className="text-red-600 text-sm">
-                        {passwordError}
+                    {errors.email?.type === "required" && (
+                      <span className="label-text-alt text-red-500">
+                        {errors.email.message}
+                      </span>
+                    )}
+                    {errors.email?.type === "pattern" && (
+                      <span className="label-text-alt text-red-500">
+                        {errors.email.message}
                       </span>
                     )}
                   </label>
-                </label>
-                <input
-                  type="password"
-                  ref={confirmPasswordRef}
-                  placeholder="Confirm Password"
-                  class="input input-bordered"
-                />
-                <label class="label">
-                  <a href="#" class="label-text-alt link link-hover">
-                    Forgot password?
-                  </a>
-                </label>
-              </div>
-              <div class="form-control mt-3">
-                <button
-                  class="btn bg-accent text-white font-bold"
-                  type="submit"
-                >
-                  Registation
-                </button>
-                <p className="text-center pt-4">
-                  Allready have a account{" "}
-                  <Link to="/login">
-                    {" "}
-                    <span className="text-primary">Please Login</span>
-                  </Link>
-                </p>
-              </div>
-            </form>
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    class="input input-bordered"
+                    {...register("email", {
+                      required: {
+                        value: true,
+                        message: "Email is Required",
+                      },
+                      pattern: {
+                        value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
+                        message: "Provide a valid Email",
+                      },
+                    })}
+                  />
+                </div>
+
+                <div class="form-control">
+                  <label class="label">
+                    {errors.password?.type === "required" && (
+                      <span className="label-text-alt text-red-500">
+                        {errors.password.message}
+                      </span>
+                    )}
+                    {errors.password?.type === "minLength" && (
+                      <span className="label-text-alt text-red-500">
+                        {errors.password.message}
+                      </span>
+                    )}
+                  </label>
+                  <input
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    class="input input-bordered"
+                    {...register("password", {
+                      required: {
+                        value: true,
+                        message: "Password is Required",
+                      },
+                      minLength: {
+                        value: 6,
+                        message: "Must be 6 characters or longer",
+                      },
+                    })}
+                  />
+                </div>
+
+                <div class="form-control mt-3">
+                  <button
+                    class="btn bg-accent text-white font-bold"
+                    type="submit"
+                  >
+                    Create Account
+                  </button>
+                  <p className="text-center pt-4">
+                    Allready have a account?{" "}
+                    <Link to="/login">
+                      <span className="text-primary">Please login</span>
+                    </Link>
+                  </p>
+                </div>
+              </form>
+            </div>
+            <SocialLogin />
           </div>
-          <SocialLogin />
         </div>
       </div>
-     </div>
     </div>
   );
 };

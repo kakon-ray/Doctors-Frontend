@@ -6,8 +6,7 @@ import { Link } from "react-router-dom";
 import auth from "../../../firebase.init";
 
 const Navbar = () => {
-
-   const [user, loading, error] = useAuthState(auth);
+  const [user, loading, error] = useAuthState(auth);
 
   const Links = [
     { name: "Home", link: "/" },
@@ -15,10 +14,9 @@ const Navbar = () => {
     { name: "Appointment", link: "/appintment" },
     { name: "Reviews", link: "/" },
     { name: "Contact Us", link: "/" },
-
   ];
   return (
-    <>
+    <div>
       <div className="navbar bg-base-100 uppercase text-sm">
         <div>
           <div className="dropdown">
@@ -58,19 +56,20 @@ const Navbar = () => {
                 </li>
               );
             })}
-
           </ul>
 
-           <div className="ml-6">
-              {
-              user? <p onClick={()=>signOut(auth)} className="cursor-pointer">Sign Out</p>:  <Link to="/login">Login </Link>
-            }
-           </div>
-          
-       
+          <div className="ml-6">
+            {user ? (
+              <p onClick={() => signOut(auth)} className="cursor-pointer">
+                Sign Out
+              </p>
+            ) : (
+              <Link to="/login">Login </Link>
+            )}
+          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

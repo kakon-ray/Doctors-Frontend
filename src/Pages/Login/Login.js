@@ -2,32 +2,26 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import SocialLogin from "./SocialLogin";
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import Swal from "sweetalert2";
 import img from "../../assets/images/chair.png";
+import { useForm } from "react-hook-form";
 
 const Login = () => {
+  const [signInWithEmailAndPassword, user, loading, error] =
+    useSignInWithEmailAndPassword(auth);
 
-  const [
-  signInWithEmailAndPassword,
-  user,
-  loading,
-  error,
-] = useSignInWithEmailAndPassword(auth);
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
 
-const handleLogin = (e) => {
-e.preventDefault()
-const email = e.target.email.value
-const password = e.target.password.value
-
-console.log(email,password)
-
-signInWithEmailAndPassword(email,password)
-
-e.target.reset()
-
-}
+  const onSubmit = (data) => {
+    signInWithEmailAndPassword(data.email, data.password);
+  };
 
   if (user) {
     Swal.fire({
@@ -40,59 +34,99 @@ e.target.reset()
   }
 
   return (
-    <div className="min-h-screen bg-base-200" style={{
+    <div
+      className="min-h-screen bg-base-200"
+      style={{
         backgroundImage: `url(${img})`,
-      }}>
-     <div className="min-h-screen bg-black bg-opacity-90">
+      }}
+    >
+      <div className="min-h-screen bg-black bg-opacity-90">
         <div class="flex justify-center pt-8  ">
-        <div class="card flex-shrink-0 w-full max-w-lg shadow-2xl bg-base-100">
-          <h1 className="text-center text-accent font-bold text-3xl mb-0 pt-6 ">
-            Login
-          </h1>
-          <div class="card-body pt-0 pb-4">
-            <form action="" onSubmit={handleLogin}>
-                        <div class="form-control">
-              <label class="label">
-                <span class="label-text">Email</span>
-              </label>
-              <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                class="input input-bordered"
-              />
+          <div class="card flex-shrink-0 w-full max-w-lg shadow-2xl bg-base-100">
+            <h1 className="text-center text-accent font-bold text-3xl mb-0 pt-6 ">
+              Login
+            </h1>
+            <div class="card-body pt-0 pb-4">
+              <form action="" onSubmit={handleSubmit(onSubmit)}>
+                <div class="form-control">
+                  <label class="label">
+                    {errors.email?.type === "required" && (
+                      <span className="label-text-alt text-red-500">
+                        {errors.email.message}
+                      </span>
+                    )}
+                    {errors.email?.type === "pattern" && (
+                      <span className="label-text-alt text-red-500">
+                        {errors.email.message}
+                      </span>
+                    )}
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="email"
+                    class="input input-bordered"
+                    {...register("email", {
+                      required: {
+                        value: true,
+                        message: "Email is Required",
+                      },
+                      pattern: {
+                        value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
+                        message: "Provide a valid Email",
+                      },
+                    })}
+                  />
+                </div>
+
+                <div class="form-control">
+                  <label class="label">
+                    {errors.password?.type === "required" && (
+                      <span className="label-text-alt text-red-500">
+                        {errors.password.message}
+                      </span>
+                    )}
+                    {errors.password?.type === "minLength" && (
+                      <span className="label-text-alt text-red-500">
+                        {errors.password.message}
+                      </span>
+                    )}
+                  </label>
+                  <input
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    class="input input-bordered"
+                    {...register("password", {
+                      required: {
+                        value: true,
+                        message: "Password is Required",
+                      },
+                      minLength: {
+                        value: 6,
+                        message: "Must be 6 characters or longer",
+                      },
+                    })}
+                  />
+                </div>
+
+                <div class="form-control mt-3">
+                  <button class="btn bg-accent text-white font-bold">
+                    Login
+                  </button>
+                  <p className="text-center pt-4">
+                    New to Doctors Portal?{" "}
+                    <Link to="/registaion">
+                      <span className="text-primary">Create new account</span>
+                    </Link>
+                  </p>
+                </div>
+              </form>
             </div>
-            <div class="form-control">
-              <label class="label">
-                <span class="label-text">Password</span>
-              </label>
-              <input
-                type="password"
-                name="password"
-                placeholder="password"
-                class="input input-bordered"
-              />
-              <label class="label">
-                <a href="#" class="label-text-alt link link-hover">
-                  Forgot password?
-                </a>
-              </label>
-            </div>
-            <div class="form-control mt-3">
-              <button class="btn bg-accent text-white font-bold">Login</button>
-              <p className="text-center pt-4">
-                New to Doctors Portal?{" "}
-                <Link to="/registaion">
-                  <span className="text-primary">Create new account</span>
-                </Link>
-              </p>
-            </div>
-            </form>
+            <SocialLogin />
           </div>
-          <SocialLogin />
         </div>
       </div>
-     </div>
     </div>
   );
 };
