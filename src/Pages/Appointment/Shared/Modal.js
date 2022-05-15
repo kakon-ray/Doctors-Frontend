@@ -1,6 +1,10 @@
 import { format } from "date-fns";
 import React from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
+import {
+  useAuthState,
+  useSendPasswordResetEmail,
+} from "react-firebase-hooks/auth";
+import Swal from "sweetalert2";
 import auth from "../../../firebase.init";
 
 const Modal = ({ modalData, selected, setModalData }) => {
@@ -9,11 +13,20 @@ const Modal = ({ modalData, selected, setModalData }) => {
   const handleAppointment = (e) => {
     e.preventDefault();
     const slot = e.target.slot.value;
-    const name = e.target.name.value;
-    const email = e.target.email.value;
+
     const phone = e.target.phone.value;
 
-    const appointmentValue = { slot, name, email, phone };
+    const appointmentValue = {
+      slot,
+      name: user?.displayName,
+      email: user?.email,
+      phone,
+      tretmentId: modalData._id,
+      date: format(selected, "PP"),
+      tretmentName: modalData.name,
+    };
+
+    console.log(appointmentValue);
 
     fetch("http://localhost:5000/appointment", {
       method: "POST",
@@ -21,10 +34,27 @@ const Modal = ({ modalData, selected, setModalData }) => {
         "content-type": "application/json",
       },
       body: JSON.stringify(appointmentValue),
-    }).then((res) => {
-      console.log("success", appointmentValue);
-      alert("users added successfully!!!");
-    });
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: "Appinted Completed",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        } else {
+          Swal.fire({
+            position: "top-center",
+            icon: "error",
+            title: "You do not appointed in this time",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      });
 
     // if setModalData null the modal is close
     setModalData(null);
