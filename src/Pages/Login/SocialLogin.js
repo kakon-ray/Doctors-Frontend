@@ -1,11 +1,27 @@
 import React from "react";
 import { useSignInWithGoogle } from "react-firebase-hooks/auth";
+import Swal from "sweetalert2";
 import auth from "../../firebase.init";
+import Loading from "../Shared/Loading";
 
 const SocialLogin = () => {
-
   const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
-  
+
+  const googleSign = () => {
+    signInWithGoogle();
+  };
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  var socialError;
+
+  if (error) {
+    socialError = (
+      <p className="text-center text-red-600 text-sm py-6">{error?.message}</p>
+    );
+  }
 
   return (
     <>
@@ -16,10 +32,14 @@ const SocialLogin = () => {
       </div>
 
       <div class="form-control py-4 mx-8">
-        <button class="btn btn-outline hover:bg-accent text-accent font-bold" onClick={()=>signInWithGoogle()}>
+        <button
+          class="btn btn-outline hover:bg-accent text-accent font-bold"
+          onClick={googleSign}
+        >
           CONTINUE WITH GOOGLE
         </button>
       </div>
+      {socialError}
     </>
   );
 };

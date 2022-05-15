@@ -7,7 +7,7 @@ import auth from "../../../firebase.init";
 
 const Navbar = () => {
   const [user, loading, error] = useAuthState(auth);
-
+  console.log(user);
   const Links = [
     { name: "Home", link: "/" },
     { name: "About", link: "/" },
@@ -60,9 +60,12 @@ const Navbar = () => {
 
           <div className="ml-6">
             {user ? (
-              <p onClick={() => signOut(auth)} className="cursor-pointer">
+              <button
+                className="btn btn-ghost cursor-pointer"
+                onClick={() => signOut(auth)}
+              >
                 Sign Out
-              </p>
+              </button>
             ) : (
               <Link to="/login">Login </Link>
             )}

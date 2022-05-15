@@ -1,23 +1,28 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import SocialLogin from "./SocialLogin";
 import validator from "validator";
 import auth from "../../firebase.init";
 import {
   useCreateUserWithEmailAndPassword,
   useAuthState,
+  useUpdateProfile,
 } from "react-firebase-hooks/auth";
 import Swal from "sweetalert2";
 import img from "../../assets/images/chair.png";
 import { useForm } from "react-hook-form";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import Loading from "../Shared/Loading";
+import { useSendEmailVerification } from "react-firebase-hooks/auth";
 
 const Registation = () => {
   const [currentUser] = useAuthState(auth);
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
-
+  const [updateProfile, updating] = useUpdateProfile(auth);
+  const [sendEmailVerification, sending, emailVaryerror] =
+    useSendEmailVerification(auth);
   const {
     register,
     handleSubmit,
@@ -25,18 +30,43 @@ const Registation = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    createUserWithEmailAndPassword(data.email, data.password);
+  let navigate = useNavigate();
+  let location = useLocation();
+  let from = location.state?.from?.pathname || "/";
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    Swal.fire({
+      position: "top-center",
+      icon: "error",
+      title: "Registation Faild",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  }
+
+  const onSubmit = async (data) => {
+    await createUserWithEmailAndPassword(data.email, data.password);
+    await updateProfile({ displayName: data.name });
+    await sendEmailVerification();
+    console.log(data.name);
   };
 
   if (user) {
     Swal.fire({
       position: "top-center",
       icon: "success",
-      title: "Your Registation Success",
+      title: "Login Success",
       showConfirmButton: false,
       timer: 1500,
     });
+
+    setTimeout(() => {
+      navigate(from, { replace: true });
+    }, 1000);
   }
 
   return (
@@ -54,6 +84,33 @@ const Registation = () => {
             </h1>
             <div class="card-body  pb-4 pt-5">
               <form action="" onSubmit={handleSubmit(onSubmit)}>
+                <div class="form-control">
+                  <label class="label">
+                    {errors.name?.type === "required" && (
+                      <span className="label-text-alt text-red-500">
+                        {errors.name.message}
+                      </span>
+                    )}
+                    {errors.name?.type === "pattern" && (
+                      <span className="label-text-alt text-red-500">
+                        {errors.name.message}
+                      </span>
+                    )}
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Your Name"
+                    class="input input-bordered"
+                    {...register("name", {
+                      required: {
+                        value: true,
+                        message: "Name is Required",
+                      },
+                    })}
+                  />
+                </div>
+
                 <div class="form-control">
                   <label class="label">
                     {errors.email?.type === "required" && (

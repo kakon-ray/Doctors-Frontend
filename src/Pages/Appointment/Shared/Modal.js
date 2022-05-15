@@ -1,7 +1,11 @@
 import { format } from "date-fns";
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../../firebase.init";
 
 const Modal = ({ modalData, selected, setModalData }) => {
+  const [user, loading, error] = useAuthState(auth);
+
   const handleAppointment = (e) => {
     e.preventDefault();
     const slot = e.target.slot.value;
@@ -42,6 +46,25 @@ const Modal = ({ modalData, selected, setModalData }) => {
             <form action="" onSubmit={handleAppointment}>
               <div class="form-control mb-2">
                 <input
+                  name="name"
+                  type="text"
+                  value={user?.displayName || ""}
+                  disabled
+                  class="input input-bordered"
+                />
+              </div>
+              <div class="form-control mb-2">
+                <input
+                  name="email"
+                  type="text"
+                  disabled
+                  value={user?.email || ""}
+                  class="input input-bordered"
+                />
+              </div>
+
+              <div class="form-control mb-2">
+                <input
                   type="text"
                   value={format(selected, "PP")}
                   class="input input-bordered"
@@ -57,22 +80,7 @@ const Modal = ({ modalData, selected, setModalData }) => {
                   })}
                 </select>
               </div>
-              <div class="form-control mb-2">
-                <input
-                  name="name"
-                  type="text"
-                  placeholder="Enter Your Name"
-                  class="input input-bordered"
-                />
-              </div>
-              <div class="form-control mb-2">
-                <input
-                  name="email"
-                  type="text"
-                  placeholder="Enter Your Email"
-                  class="input input-bordered"
-                />
-              </div>
+
               <div class="form-control mb-2">
                 <input
                   type="text"

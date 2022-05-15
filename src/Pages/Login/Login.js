@@ -1,16 +1,21 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import SocialLogin from "./SocialLogin";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import Swal from "sweetalert2";
 import img from "../../assets/images/chair.png";
 import { useForm } from "react-hook-form";
+import Loading from "../Shared/Loading";
+import { useSendPasswordResetEmail } from "react-firebase-hooks/auth";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
+  const [sendPasswordResetEmail, sending, passwordReseterror] =
+    useSendPasswordResetEmail(auth);
 
   const {
     register,
@@ -18,6 +23,14 @@ const Login = () => {
     watch,
     formState: { errors },
   } = useForm();
+
+  let navigate = useNavigate();
+  let location = useLocation();
+  let from = location.state?.from?.pathname || "/";
+
+  if (loading) {
+    return <Loading />;
+  }
 
   const onSubmit = (data) => {
     signInWithEmailAndPassword(data.email, data.password);
@@ -27,7 +40,33 @@ const Login = () => {
     Swal.fire({
       position: "top-center",
       icon: "success",
-      title: "Your Registation Success",
+      title: "Login Success",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+
+    setTimeout(() => {
+      navigate(from, { replace: true });
+    }, 1000);
+  }
+
+  const passwordReset = () => {
+    sendPasswordResetEmail(email).then((res) => {
+      Swal.fire({
+        position: "top-center",
+        icon: "success",
+        title: "Password Reset Email send",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    });
+  };
+
+  if (error) {
+    Swal.fire({
+      position: "top-center",
+      icon: "error",
+      title: "Login Faild",
       showConfirmButton: false,
       timer: 1500,
     });
@@ -76,6 +115,7 @@ const Login = () => {
                         message: "Provide a valid Email",
                       },
                     })}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
 
@@ -114,6 +154,12 @@ const Login = () => {
                   <button class="btn bg-accent text-white font-bold">
                     Login
                   </button>
+                  <p
+                    className="text-center text-red-600 pt-4 cursor-pointer"
+                    onClick={passwordReset}
+                  >
+                    Password Reset
+                  </p>
                   <p className="text-center pt-4">
                     New to Doctors Portal?{" "}
                     <Link to="/registaion">
