@@ -55,22 +55,12 @@ const Login = () => {
       Swal.fire({
         position: "top-center",
         icon: "success",
-        title: "Password Reset Email send",
+        title: "Password reset email send",
         showConfirmButton: false,
         timer: 1500,
       });
     });
   };
-
-  if (error) {
-    Swal.fire({
-      position: "top-center",
-      icon: "error",
-      title: "Login Faild",
-      showConfirmButton: false,
-      timer: 1500,
-    });
-  }
 
   return (
     <div

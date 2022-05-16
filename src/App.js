@@ -10,6 +10,10 @@ import Home from "./Pages/Home/Home";
 import Registation from "./Pages/Login/Registation";
 import RequireAuth from "./Pages/Shared/RequireAuth";
 import AppointmentBanner from "./Pages/Appointment/AppointmentBanner";
+import Dashboard from "./Pages/Dashboard/Dashboard";
+import MyAppointment from "./Pages/Dashboard/MyAppointment";
+import Revew from "./Pages/Dashboard/Revew";
+import MyHistory from "./Pages/Dashboard/MyHistory";
 
 function App() {
   return (
@@ -28,6 +32,20 @@ function App() {
             </RequireAuth>
           }
         />
+
+        <Route
+          path="dashboard"
+          element={
+            <RequireAuth>
+              <Dashboard />
+            </RequireAuth>
+          }
+        >
+          <Route index element={<MyAppointment></MyAppointment>}></Route>
+          <Route path="reveiw" element={<Revew></Revew>}></Route>
+          <Route path="history" element={<MyHistory></MyHistory>}></Route>
+        </Route>
+
         <Route path="revew" element={<Reviews></Reviews>} />
         <Route path="login" element={<Login></Login>} />
         <Route path="registaion" element={<Registation></Registation>} />

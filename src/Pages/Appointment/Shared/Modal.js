@@ -7,17 +7,17 @@ import {
 import Swal from "sweetalert2";
 import auth from "../../../firebase.init";
 
-const Modal = ({ modalData, selected, setModalData }) => {
+const Modal = ({ modalData, selected, setModalData, refetch }) => {
   const [user, loading, error] = useAuthState(auth);
 
   const handleAppointment = (e) => {
     e.preventDefault();
-    const slot = e.target.slot.value;
+    const slots = e.target.slot.value;
 
     const phone = e.target.phone.value;
 
     const appointmentValue = {
-      slot,
+      slots,
       name: user?.displayName,
       email: user?.email,
       phone,
@@ -56,6 +56,7 @@ const Modal = ({ modalData, selected, setModalData }) => {
         }
       });
 
+    refetch();
     // if setModalData null the modal is close
     setModalData(null);
   };

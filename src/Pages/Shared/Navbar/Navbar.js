@@ -46,7 +46,7 @@ const Navbar = () => {
           </div>
           <a className="btn btn-ghost normal-case text-xl">Doctors</a>
         </div>
-        <div className="navbar-right flex ml-auto justify-end hidden lg:flex mr-12">
+        <div className="navbar-center flex ml-auto justify-end hidden lg:flex mr-12">
           <ul className="menu menu-horizontal p-0">
             {Links.map((li) => {
               return (
@@ -60,16 +60,38 @@ const Navbar = () => {
 
           <div className="ml-6">
             {user ? (
-              <button
-                className="btn btn-ghost cursor-pointer"
-                onClick={() => signOut(auth)}
-              >
-                Sign Out
-              </button>
+              <>
+                <Link to="/dashboard">Dashboard </Link>
+                <button
+                  className="btn btn-ghost cursor-pointer ml-2"
+                  onClick={() => signOut(auth)}
+                >
+                  Sign Out
+                </button>
+              </>
             ) : (
-              <Link to="/login">Login </Link>
+              <>
+                <Link to="/login">Login </Link>
+              </>
             )}
           </div>
+        </div>
+        <div className="navbar-end lg:hidden">
+          <label
+            for="my-drawer-2"
+            tabindex="1"
+            className="btn btn-ghost lg:hidden pr-0"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
+            </svg>
+          </label>
         </div>
       </div>
     </div>
