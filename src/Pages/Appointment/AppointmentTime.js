@@ -11,11 +11,12 @@ const AppointmentTime = ({ selected }) => {
   const [modalData, setModalData] = useState(null);
 
   console.log(format(selected, "PP"));
+  // use React query and fetch data
   const {
     isLoading,
     error,
     data: services,
-    refetch
+    refetch,
   } = useQuery(["abailable", format(selected, "PP")], () =>
     fetch(
       `http://localhost:5000/abailable?date=${format(selected, "PP")}`

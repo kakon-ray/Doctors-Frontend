@@ -1,3 +1,4 @@
+import { signOut } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
@@ -19,6 +20,8 @@ const MyAppointment = () => {
     })
       .then((res) => {
         if (res.status === 403 || res.status === 401) {
+          signOut(auth);
+          localStorage.removeItem("accessToken");
           navigation("/");
         }
         return res.json();
@@ -27,31 +30,29 @@ const MyAppointment = () => {
   }, []);
 
   return (
-    <div>
-      <div class="overflow-x-auto">
-        <table class="table w-full">
-          <thead>
-            <tr className="text-center">
-              <th>Name</th>
-              <th>Date</th>
-              <th>Time</th>
-              <th>Email</th>
-            </tr>
-          </thead>
-          <tbody>
-            {appointment?.map((item) => {
-              return (
-                <tr key={item._id} className="text-center">
-                  <td>{item.name}</td>
-                  <td>{item.date}</td>
-                  <td>{item.slots}</td>
-                  <td>{item.email}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
+    <div class="overflow-x-auto">
+      <table class="table w-full">
+        <thead>
+          <tr className="text-center">
+            <th>Name</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          {appointment?.map((item) => {
+            return (
+              <tr key={item._id} className="text-center">
+                <td>{item.name}</td>
+                <td>{item.date}</td>
+                <td>{item.slots}</td>
+                <td>{item.email}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
   );
 };
