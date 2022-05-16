@@ -1,11 +1,19 @@
 import React from "react";
 import { useSignInWithGoogle } from "react-firebase-hooks/auth";
+import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import auth from "../../firebase.init";
+import useToken from "../../Hooks/useToken";
 import Loading from "../Shared/Loading";
 
 const SocialLogin = () => {
   const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
+
+  const [token] = useToken(user);
+
+  let navigate = useNavigate();
+  let location = useLocation();
+  let from = location.state?.from?.pathname || "/";
 
   const googleSign = () => {
     signInWithGoogle();
@@ -13,6 +21,19 @@ const SocialLogin = () => {
 
   if (loading) {
     return <Loading />;
+  }
+  if (token) {
+    Swal.fire({
+      position: "top-center",
+      icon: "success",
+      title: "Login Success",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+
+    setTimeout(() => {
+      navigate(from, { replace: true });
+    }, 1000);
   }
 
   var socialError;

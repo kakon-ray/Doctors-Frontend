@@ -9,6 +9,7 @@ import img from "../../assets/images/chair.png";
 import { useForm } from "react-hook-form";
 import Loading from "../Shared/Loading";
 import { useSendPasswordResetEmail } from "react-firebase-hooks/auth";
+import useToken from "../../Hooks/useToken";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -26,6 +27,7 @@ const Login = () => {
 
   let navigate = useNavigate();
   let location = useLocation();
+  const [token] = useToken(user);
   let from = location.state?.from?.pathname || "/";
 
   if (loading) {
@@ -36,7 +38,7 @@ const Login = () => {
     signInWithEmailAndPassword(data.email, data.password);
   };
 
-  if (user) {
+  if (token) {
     Swal.fire({
       position: "top-center",
       icon: "success",

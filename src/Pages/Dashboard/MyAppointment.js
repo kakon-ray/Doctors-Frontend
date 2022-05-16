@@ -1,17 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
+import Loading from "../Shared/Loading";
 
 const MyAppointment = () => {
   const [appointment, setAppointment] = useState([]);
 
   const [user, loading, error] = useAuthState(auth);
+  const navigation = useNavigate();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/myappointment?email=${user.email}`)
-      .then((res) => res.json())
+    fetch(`http://localhost:5000/myappointment?email=${user.email}`, {
+      method: "GET",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+      .then((res) => {
+        if (res.status === 403 || res.status === 401) {
+          navigation("/");
+        }
+        return res.json();
+      })
       .then((data) => setAppointment(data));
   }, []);
+
   return (
     <div>
       <div class="overflow-x-auto">
@@ -25,7 +39,7 @@ const MyAppointment = () => {
             </tr>
           </thead>
           <tbody>
-            {appointment.map((item) => {
+            {appointment?.map((item) => {
               return (
                 <tr key={item._id} className="text-center">
                   <td>{item.name}</td>

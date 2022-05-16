@@ -64,7 +64,10 @@ const Navbar = () => {
                 <Link to="/dashboard">Dashboard </Link>
                 <button
                   className="btn btn-ghost cursor-pointer ml-2"
-                  onClick={() => signOut(auth)}
+                  onClick={() => {
+                    signOut(auth);
+                    localStorage.removeItem("accessToken");
+                  }}
                 >
                   Sign Out
                 </button>

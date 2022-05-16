@@ -15,6 +15,7 @@ import { useForm } from "react-hook-form";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import Loading from "../Shared/Loading";
 import { useSendEmailVerification } from "react-firebase-hooks/auth";
+import useToken from "../../Hooks/useToken";
 
 const Registation = () => {
   const [currentUser] = useAuthState(auth);
@@ -29,6 +30,9 @@ const Registation = () => {
     watch,
     formState: { errors },
   } = useForm();
+
+  // create jwt token and save user info database
+  const [token] = useToken(user);
 
   let navigate = useNavigate();
   let location = useLocation();
@@ -55,7 +59,7 @@ const Registation = () => {
     console.log(data.name);
   };
 
-  if (user) {
+  if (token) {
     Swal.fire({
       position: "top-center",
       icon: "success",
