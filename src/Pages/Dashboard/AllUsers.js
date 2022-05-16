@@ -1,6 +1,7 @@
 import React from "react";
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 import Loading from "../Shared/Loading";
+import UserRow from "./UserRow";
 
 const queryClient = new QueryClient();
 
@@ -11,34 +12,30 @@ const AllUsers = () => {
     data: alluser,
     refetch,
   } = useQuery("allusers", () =>
-    fetch(`http://localhost:5000/allusers`).then((res) => res.json())
+    fetch(`http://localhost:5000/allusers`, {
+      method: "GET",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    }).then((res) => res.json())
   );
 
   if (isLoading) {
     return <Loading />;
   }
 
-  console.log(alluser);
-
   return (
-    <div class="overflow-x-auto">
+    <div class="overflow-x-scroll">
       <table class="table w-full">
         <thead>
           <tr className="text-center">
-            <th>Name</th>
-            <th>ID</th>
             <th>Email</th>
+            <th>Manage User</th>
           </tr>
         </thead>
         <tbody>
-          {alluser?.map((item) => {
-            return (
-              <tr key={item._id} className="text-center">
-                <td>{item.name}</td>
-                <td>{item._id}</td>
-                <td>{item.email}</td>
-              </tr>
-            );
+          {alluser?.map((user) => {
+            return <UserRow user={user} refetch={refetch} />;
           })}
         </tbody>
       </table>
