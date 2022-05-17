@@ -12,12 +12,15 @@ const MyAppointment = () => {
   const navigation = useNavigate();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/myappointment?email=${user.email}`, {
-      method: "GET",
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
+    fetch(
+      `https://fast-taiga-21201.herokuapp.com/myappointment?email=${user.email}`,
+      {
+        method: "GET",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    )
       .then((res) => {
         if (res.status === 403 || res.status === 401) {
           signOut(auth);

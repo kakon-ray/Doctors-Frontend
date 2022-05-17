@@ -28,7 +28,7 @@ const Modal = ({ modalData, selected, setModalData, refetch }) => {
 
     console.log(appointmentValue);
 
-    fetch("http://localhost:5000/appointment", {
+    fetch("https://fast-taiga-21201.herokuapp.com/appointment", {
       method: "POST",
       headers: {
         "content-type": "application/json",

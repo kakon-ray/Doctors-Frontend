@@ -19,7 +19,10 @@ const AppointmentTime = ({ selected }) => {
     refetch,
   } = useQuery(["abailable", format(selected, "PP")], () =>
     fetch(
-      `http://localhost:5000/abailable?date=${format(selected, "PP")}`
+      `https://fast-taiga-21201.herokuapp.com/abailable?date=${format(
+        selected,
+        "PP"
+      )}`
     ).then((res) => res.json())
   );
 

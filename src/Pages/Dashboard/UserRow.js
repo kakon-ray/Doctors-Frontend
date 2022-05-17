@@ -3,7 +3,7 @@ import Swal from "sweetalert2";
 
 const UserRow = ({ user, refetch }) => {
   const makeAdmin = () => {
-    fetch(`http://localhost:5000/user/admin/${user.email}`, {
+    fetch(`https://fast-taiga-21201.herokuapp.com/user/admin/${user.email}`, {
       method: "PUT",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,

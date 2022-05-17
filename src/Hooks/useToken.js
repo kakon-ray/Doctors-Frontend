@@ -11,7 +11,7 @@ const useToken = (user) => {
     const addUser = async () => {
       if (email) {
         const response = await axios.put(
-          `http://localhost:5000/user/${email}`,
+          `https://fast-taiga-21201.herokuapp.com/user/${email}`,
           currentUser
         );
         const accessToken = response.data.token;
@@ -23,7 +23,7 @@ const useToken = (user) => {
     addUser();
     // useing fetch
     //  if (email) {
-    //    fetch(`http://localhost:5000/user/${email}`, {
+    //    fetch(`https://fast-taiga-21201.herokuapp.com/user/${email}`, {
     //      method: "PUT",
     //      headers: {
     //        "content-type": "application/json",
