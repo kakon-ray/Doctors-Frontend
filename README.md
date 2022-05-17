@@ -2,8 +2,10 @@
 
 # DOCTORS PORTAL SERVER [REPO LINK](https://github.com/kakon-ray/Doctors-Server)
 
-> ## This is a MERN STACK PROJECT
->
-> ## THIS PROJECT BUILD TO USE FRONT END TECHNOLOGY REACT JS, TAILWIND CSS, CUSTOM CSS, REACT QUERY, DAISY UI (TAILWIND FREE COMPONENT) , DATE FNS(DATE FORMATTING), REACT HOOK FORM (FORM VALIDATION), SWEET ALERT,FIREBASE AUTHNTICATION AND DEPLOYMENT ETC.
+> ## This is a MERN stack project
 
-> ## THIS PROJECT BUILD TO BACKEND TECHNOLOGY NODE JS, EXPRESS, MONGODB, HEROKU DEPLOY
+> ## This project build to use front end technology ReactJs, Tailwind css, Custom css, React Query, Daisy Ui(Tailwind Free Component), Date fns(Date formatting),React Hook Form(Form Validation),Sweet Alert, Firebase Authentication and Deployment etc.
+
+> ## THIS PROJECT BUILD TO BACKEND TECHNOLOGY NODE JS, EXPRESS, MONGODB, HEROKU DEPLOY.
+>
+> ## This project build to beackend technology Node Js, Express, Mongodb, Heroku Deploy.
