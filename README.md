@@ -1,4 +1,6 @@
-# Doctors Portal [Live Link](https://doctors-portal-8a03e.web.app/)
+# DOCTORS PORTAL [Live Link](https://doctors-portal-8a03e.web.app/)
+
+# DOCTORS PORTAL SERVER [REPO LINK](https://github.com/kakon-ray/Doctors-Server)
 
 > ## This is a MERN STACK PROJECT
 >
