@@ -9,16 +9,30 @@ const UserRow = ({ user, refetch }) => {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.status === 403) {
+          Swal.fire({
+            position: "top-center",
+            icon: "error",
+            title: "You do not make admin anywhere",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        } else {
+          return res.json();
+        }
+      })
       .then((data) => {
-        refetch();
-        Swal.fire({
-          position: "top-center",
-          icon: "success",
-          title: "Successfully Make Admin",
-          showConfirmButton: false,
-          timer: 1500,
-        });
+        if (data.modifiedCount > 0) {
+          refetch();
+          Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: "Successfully Make Admin",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
       });
   };
   return (
