@@ -25,12 +25,20 @@ const Dashboard = () => {
               <Link to="/dashboard/reveiw">My Reveiw</Link>
             </li>
             <li>
-              <Link to="/dashboard/history">My Reveiw</Link>
+              <Link to="/dashboard/history">My History</Link>
             </li>
             {admin && (
-              <li>
-                <Link to="/dashboard/alluser">All Users</Link>
-              </li>
+              <>
+                <li>
+                  <Link to="/dashboard/alluser">All Users</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/addoctor">Add a Doctor</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/managedoctor">Manage Doctor</Link>
+                </li>
+              </>
             )}
           </ul>
         </div>

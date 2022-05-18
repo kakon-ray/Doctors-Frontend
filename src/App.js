@@ -16,6 +16,8 @@ import Revew from "./Pages/Dashboard/Revew";
 import MyHistory from "./Pages/Dashboard/MyHistory";
 import AllUsers from "./Pages/Dashboard/AllUsers";
 import RequireAdmin from "./Pages/Shared/RequireAdmin";
+import AddDoctors from "./Pages/Dashboard/AddDoctors";
+import ManageDoctor from "./Pages/Dashboard/ManageDoctor";
 
 function App() {
   return (
@@ -51,6 +53,22 @@ function App() {
             element={
               <RequireAdmin>
                 <AllUsers></AllUsers>
+              </RequireAdmin>
+            }
+          ></Route>
+          <Route
+            path="addoctor"
+            element={
+              <RequireAdmin>
+                <AddDoctors></AddDoctors>
+              </RequireAdmin>
+            }
+          ></Route>
+          <Route
+            path="managedoctor"
+            element={
+              <RequireAdmin>
+                <ManageDoctor></ManageDoctor>
               </RequireAdmin>
             }
           ></Route>
