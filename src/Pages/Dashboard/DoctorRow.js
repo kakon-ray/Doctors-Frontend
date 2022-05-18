@@ -12,7 +12,7 @@ const DoctorRow = ({ doctor, refetch }) => {
       denyButtonText: `No`,
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/doctor/${doctor.email}`, {
+        fetch(`https://fast-taiga-21201.herokuapp.com/doctor/${doctor.email}`, {
           method: "DELETE",
           headers: {
             authorization: `Bearer ${localStorage.getItem("accessToken")}`,

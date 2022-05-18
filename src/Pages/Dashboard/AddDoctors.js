@@ -18,7 +18,9 @@ const AddDoctors = () => {
 
   // use React query and fetch data
   const { isLoading, error, data, refetch } = useQuery(["services"], () =>
-    fetch(`http://localhost:5000/services`).then((res) => res.json())
+    fetch(`https://fast-taiga-21201.herokuapp.com/services`).then((res) =>
+      res.json()
+    )
   );
 
   if (isLoading) {
@@ -49,7 +51,7 @@ const AddDoctors = () => {
             img: img,
           };
 
-          fetch("http://localhost:5000/doctor", {
+          fetch("https://fast-taiga-21201.herokuapp.com/doctor", {
             method: "POST",
             headers: {
               "content-type": "application/json",
