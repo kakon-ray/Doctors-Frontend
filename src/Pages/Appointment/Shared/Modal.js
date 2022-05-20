@@ -24,6 +24,7 @@ const Modal = ({ modalData, selected, setModalData, refetch }) => {
       tretmentId: modalData._id,
       date: format(selected, "PP"),
       tretmentName: modalData.name,
+      price: modalData.price,
     };
 
     console.log(appointmentValue);

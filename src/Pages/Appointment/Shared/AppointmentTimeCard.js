@@ -10,6 +10,7 @@ const AppointmentTimeCard = ({ service, setModalData }) => {
           <div>
             <h2 class="text-2xl text-secondary font-bold">{service.name}</h2>
             <p className="text-sm">{service.slots[0]}</p>
+            <p className="text-sm">Price: ${service.price}</p>
 
             <p>{service.slots.length + "slots abable"}</p>
 

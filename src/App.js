@@ -18,6 +18,7 @@ import AllUsers from "./Pages/Dashboard/AllUsers";
 import RequireAdmin from "./Pages/Shared/RequireAdmin";
 import AddDoctors from "./Pages/Dashboard/AddDoctors";
 import ManageDoctor from "./Pages/Dashboard/ManageDoctor";
+import Payment from "./Pages/Dashboard/Payment";
 
 function App() {
   return (
@@ -69,6 +70,14 @@ function App() {
             element={
               <RequireAdmin>
                 <ManageDoctor></ManageDoctor>
+              </RequireAdmin>
+            }
+          ></Route>
+          <Route
+            path="payment/:id"
+            element={
+              <RequireAdmin>
+                <Payment></Payment>
               </RequireAdmin>
             }
           ></Route>
