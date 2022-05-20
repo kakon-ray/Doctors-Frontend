@@ -5,12 +5,13 @@ const CheckoutForm = ({ data }) => {
   const [cardError, setCardError] = useState("");
   const [success, setSuccess] = useState("");
   const [transactionId, setTransactionId] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const stripe = useStripe();
   const elements = useElements();
   const [clientSecret, setClientSecret] = useState("");
 
-  const { price, name, email } = data;
+  const { price, name, email, _id } = data;
 
   useEffect(() => {
     fetch("http://localhost:5000/create-payment-intent", {
@@ -49,10 +50,11 @@ const CheckoutForm = ({ data }) => {
 
     if (error) {
       setCardError(error.message);
-      setSuccess("");
     } else {
       setCardError("");
     }
+    setSuccess("");
+    setLoading(true);
 
     // Confirm card pement
 
@@ -70,11 +72,31 @@ const CheckoutForm = ({ data }) => {
     if (intentError) {
       setCardError(intentError.message);
       setSuccess("");
+      setLoading(false);
     } else {
       setCardError("");
 
       setTransactionId(paymentIntent.id);
       setSuccess("Congrets! Your Pement is completed");
+
+      // update payment mathod and save database
+      const payment = {
+        transactionId: paymentIntent.id,
+        appointment: _id,
+      };
+      fetch(`http://localhost:5000/appointment/${_id}`, {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+        body: JSON.stringify(payment),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          setLoading(false);
+        });
     }
   };
   return (
