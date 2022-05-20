@@ -28,7 +28,7 @@ const Payment = () => {
   const { id } = useParams();
 
   const { isLoading, error, data, refetch } = useQuery("doctors", () =>
-    fetch(`http://localhost:5000/appointment/${id}`, {
+    fetch(`https://fast-taiga-21201.herokuapp.com/appointment/${id}`, {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,

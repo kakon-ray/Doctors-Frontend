@@ -14,7 +14,7 @@ const CheckoutForm = ({ data }) => {
   const { price, name, email, _id } = data;
 
   useEffect(() => {
-    fetch("http://localhost:5000/create-payment-intent", {
+    fetch("https://fast-taiga-21201.herokuapp.com/create-payment-intent", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -84,7 +84,7 @@ const CheckoutForm = ({ data }) => {
         transactionId: paymentIntent.id,
         appointment: _id,
       };
-      fetch(`http://localhost:5000/appointment/${_id}`, {
+      fetch(`https://fast-taiga-21201.herokuapp.com/appointment/${_id}`, {
         method: "PATCH",
         headers: {
           "content-type": "application/json",
